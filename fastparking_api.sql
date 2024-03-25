@@ -8,7 +8,7 @@ CREATE TABLE preco (
     demais_horas DECIMAL(10,2) NOT NULLid
 );
 
-CREATE TABLE registros (
+CREATE TABLE cliente (
     id INT PRIMARY KEY AUTO_INCREMENT,
     nome_cliente VARCHAR(255) NOT NULL,
     placa_carro VARCHAR(10) NOT NULL,

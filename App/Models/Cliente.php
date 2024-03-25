@@ -4,7 +4,7 @@ class Cliente {
 
     public $id;
     public $nomeCliente;
-    public $totalCarro;
+    public $placaCarro;
     public $dataHoraEntrada;
     public $dataHoraSaida;
     public $valorTotal;
