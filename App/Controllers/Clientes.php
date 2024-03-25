@@ -35,7 +35,7 @@ class Clientes extends Controller
             echo json_encode($clienteModel);
         } else {
             http_response_code(500);
-            echo json_encode(['erro' => "Problemas ao inserir o preço"]);
+            echo json_encode(['erro' => "Problemas ao inserir o cliente"]);
         }
 
     }
@@ -51,7 +51,48 @@ class Clientes extends Controller
             exit;
         }
 
+        $clienteModel = $this->calcularValor($clienteModel);
         
+        $clienteModel->atualizar();
 
+        echo json_encode($clienteModel, JSON_UNESCAPED_UNICODE);
+
+    }
+
+    private function calcularValor($clienteModel) {
+        $dataEntrada = DateTime::createFromFormat("Y-m-d H:i:s", $clienteModel->dataHoraEntrada);
+
+        $dataSaida = new DateTime();
+
+        $intervalo = $dataSaida->diff($dataEntrada);
+
+        $horas = 0;
+
+        if ($intervalo->d > 0) {
+            $horas = $horas + $intervalo->d * 24;
+        }
+
+        $horas = $horas + $intervalo->h;
+
+        // tolerância de 10 minutos
+        if ($intervalo->i > 10) {
+            $horas += 1;
+        }
+
+        $precoModel = $this->model("Preco");
+
+        $precoModel = $precoModel->buscarPorId($clienteModel->precoId);
+
+        $clienteModel->valorTotal = $precoModel->primeiraHora;
+
+        $horas--;
+
+        if ($horas > 0) {
+            $clienteModel->valorTotal += $precoModel->demaisHoras * $horas;
+        }
+
+        $clienteModel->dataHoraSaida = $dataSaida->format("Y-m-d H:i:s");
+
+        return $clienteModel;
     }
 }

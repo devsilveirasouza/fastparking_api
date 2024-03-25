@@ -62,13 +62,13 @@ class Cliente
                 return null;
             }
 
-            $this->id = $cliente->nomeCliente;
-            $this->nomeCliente = $cliente->nomeCliente;
-            $this->placaCarro = $cliente->placaCarro;
-            $this->dataHoraEntrada = $cliente->dataHoraEntrada;
-            $this->dataHoraSaida = $cliente->dataHoraSaida;
-            $this->valorTotal = $cliente->valorTotal;
-            $this->precoId = $cliente->precoId;
+            $this->id = $cliente->id;
+            $this->nomeCliente = $cliente->nome_cliente;
+            $this->placaCarro = $cliente->placa_carro;
+            $this->dataHoraEntrada = $cliente->data_hora_entrada;
+            $this->dataHoraSaida = $cliente->data_hora_saida;
+            $this->valorTotal = $cliente->valor_total;
+            $this->precoId = $cliente->preco_id;
 
             return $this;
         } else {
@@ -78,7 +78,7 @@ class Cliente
 
     public function atualizar()
     {
-        $sql = "UPDATE cliente SET data_hora_saida = ? WHERE id = ?";
+        $sql = "UPDATE cliente SET data_hora_saida = ?, valor_total = ? WHERE id = ?";
 
         $stmt = Model::getConn()->prepare($sql);
         $stmt->bindValue(1, $this->dataHoraSaida);
