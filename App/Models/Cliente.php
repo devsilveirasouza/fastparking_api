@@ -31,7 +31,7 @@ class Cliente
 
     public function inserir()
     {
-        $sql = "INSERT INTO cliente (nome_cliente, placa_carro, data_hora_entrada, preco_id) VALUES (?, ?, ?, ?)";
+        $sql = "INSERT INTO cliente (nomeCliente, placaCarro, dataHoraEntrada, precoId) VALUES (?, ?, ?, ?)";
 
         $stmt = Model::getConn()->prepare($sql);
         $stmt->bindValue(1, $this->nomeCliente);
@@ -63,12 +63,12 @@ class Cliente
             }
 
             $this->id = $cliente->id;
-            $this->nomeCliente = $cliente->nome_cliente;
-            $this->placaCarro = $cliente->placa_carro;
-            $this->dataHoraEntrada = $cliente->data_hora_entrada;
-            $this->dataHoraSaida = $cliente->data_hora_saida;
-            $this->valorTotal = $cliente->valor_total;
-            $this->precoId = $cliente->preco_id;
+            $this->nomeCliente = $cliente->nomeCliente;
+            $this->placaCarro = $cliente->placaCarro;
+            $this->dataHoraEntrada = $cliente->dataHoraEntrada;
+            $this->dataHoraSaida = $cliente->dataHoraSaida;
+            $this->valorTotal = $cliente->valorTotal;
+            $this->precoId = $cliente->precoId;
 
             return $this;
         } else {
@@ -78,7 +78,7 @@ class Cliente
 
     public function atualizar()
     {
-        $sql = "UPDATE cliente SET data_hora_saida = ?, valor_total = ? WHERE id = ?";
+        $sql = "UPDATE cliente SET dataHoraSaida = ?, valorTotal = ? WHERE id = ?";
 
         $stmt = Model::getConn()->prepare($sql);
         $stmt->bindValue(1, $this->dataHoraSaida);

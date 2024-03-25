@@ -54,8 +54,8 @@ class Preco {
             } 
 
             $this->id = $preco->id;
-            $this->primeiraHora = $preco->primeiraHora;
-            $this->demaisHoras = $preco->demaisHoras;
+            $this->primeiraHora = $preco->primeira_hora;
+            $this->demaisHoras = $preco->demais_horas;
 
             return $this;
         } else {
