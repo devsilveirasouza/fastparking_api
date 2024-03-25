@@ -8,7 +8,7 @@ class Preco {
     public $primeiraHora;
     public $demaisHoras;
 
-    public function getUltimoPrecoInserido() {
+    public function getUltimoInserido() {
 
         $sql = "SELECT * FROM preco ORDER BY id DESC LIMIT 1";
 
@@ -25,7 +25,7 @@ class Preco {
     }
 
     public function inserir() {
-        $sql = "INSERT INT preco (primeira_hora, demais_horas) VALUES (?, ?)";
+        $sql = "INSERT INTO preco (primeira_hora, demais_horas) VALUES (?, ?)";
 
         $stmt = Model::getConn()->prepare($sql);
         $stmt->bindValue(1, $this->primeiraHora);
